@@ -3,3 +3,5 @@ dist/
 src/playground/
 notes.TXT
 .idea/
+public/bundle*
+public/style*
