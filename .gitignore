@@ -5,3 +5,4 @@ notes.TXT
 .idea/
 public/bundle*
 public/style*
+yarn-error.log

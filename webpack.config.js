@@ -1,12 +1,15 @@
 const path = require('path');
+const glob = require('glob');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin')
 
 // Define exports for webpack.
 module.exports = (env) => {
   const isProduction = env === 'production';
-
   return {
     entry: './src/app.js',
     output: {
@@ -52,6 +55,23 @@ module.exports = (env) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: 'styles.css'
+      }),
+      new PurgecssPlugin({
+        paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
+        only: ['bundle', 'vendor']
+      }),
+      new CompressionPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.(js|s?css|html|svg)$/,
+        threshold: 8192,
+        minRatio: 0.8
+      }),
+      new BrotliPlugin({
+        asset: '[path].br[query]',
+        test: /\.(js|s?css|html|svg)$/,
+        threshold: 10240,
+        minRatio: 0.8
       })
     ],
     // Reduce the size of the bundle.js file.
