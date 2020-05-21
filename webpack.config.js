@@ -13,8 +13,8 @@ module.exports = (env) => {
   return {
     entry: './src/app.js',
     output: {
-      path: path.join(__dirname, 'public'),
-      filename: 'bundle.js'
+      path: path.join(__dirname, 'public', 'resources'),
+      filename: 'js/bundle.js'
     },
     module: {
       rules: [{
@@ -27,16 +27,12 @@ module.exports = (env) => {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
+            options: { sourceMap: true },
           },
           {
             loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
+            options: { sourceMap: true },
+          },
         ]
       }]
     },
@@ -54,7 +50,7 @@ module.exports = (env) => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'styles.css'
+        filename: 'css/styles.css'
       }),
       new PurgecssPlugin({
         paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
@@ -77,8 +73,10 @@ module.exports = (env) => {
     // Reduce the size of the bundle.js file.
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
+      index: 'index.html',
       contentBase: path.join(__dirname, 'public'),
-      historyApiFallback: true
+      historyApiFallback: true,
+      publicPath: '/resources/'
     }
   }
 }

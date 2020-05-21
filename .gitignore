@@ -3,7 +3,7 @@ dist/
 src/playground/
 notes.TXT
 .idea/
-public/bundle*
-public/style*
+public/resources/css
+public/resources/js
 yarn-error.log
 package-lock.json
