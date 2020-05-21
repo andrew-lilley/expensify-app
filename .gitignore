@@ -6,3 +6,4 @@ notes.TXT
 public/bundle*
 public/style*
 yarn-error.log
+package-lock.json

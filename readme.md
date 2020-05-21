@@ -2,4 +2,4 @@
 
 This repository is my undertaking of the 'The Complete React Developer Course' by Andrew Mead.
 
-I used different version for most packages and I have a different configuration of webpack as I am using v4.
+I have used different versions for most of the packages used in the training course and I have a different configuration of webpack because I am using v4.
