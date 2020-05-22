@@ -118,5 +118,8 @@ exports[`should render ExpenseList with empty message 1`] = `
   <h1>
     Expense List
   </h1>
+  <p>
+    There are no expenses matching your search.
+  </p>
 </div>
 `;
