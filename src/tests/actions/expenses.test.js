@@ -4,10 +4,11 @@ import {
   startAddExpense, 
   addExpense,
   editExpense, 
+  startEditExpense,
   removeExpense, 
+  startRemoveExpense,
   setExpenses, 
-  startSetExpenses, 
-  startRemoveExpense 
+  startSetExpenses
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import database from "../../firebase/firebase";
@@ -53,6 +54,9 @@ test('Should remove expenses from firebase', (done) => {
     // Expect that the record returns null.
     expect(snapshot.val()).toBeFalsy();
     done();
+  }).catch((e) => {
+    console.log('Should remove expenses from firebase error', e);
+    done();
   });
 });
 
@@ -68,6 +72,34 @@ test('Should setup edit expense action object', () => {
   })
 });
 
+test('Should edit expenses from firebase', (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  const updates = {
+    description: "A Car",
+    amount: 156789
+  };
+  store.dispatch(startEditExpense(id, updates)).then((ref) => {
+    const actions = store.getActions();
+    expect(actions[0]).toStrictEqual({
+      type: 'EDIT_EXPENSE',
+      id,
+      updates
+    });
+
+    // Get record from Firebase and pass into the next promise.
+    return database.ref(`expenses/${id}`).once('value');
+  }).then((snapshot) => {
+    // Check that changes were made.
+    expect(snapshot.val().description).toBe(updates.description);
+    expect(snapshot.val().amount).toBe(updates.amount);
+    done();
+  }).catch((e) => {
+    console.log('Should edit expenses from firebase error', e);
+    done();
+  });
+});
+
 test('Should setup add expense action object with provided values', () => {
   const action = addExpense(expenses[2]);
   expect(action).toStrictEqual({
@@ -78,7 +110,7 @@ test('Should setup add expense action object with provided values', () => {
 
 // Using 'done' allows us to test an asynchronous actions.
 // Jest waits for the done function to be called.
-test('Should add expense to database and store', (done) => {
+test('Should add expense to Firebase and store', (done) => {
   const store = createMockStore({});
   const expenseData = {
     description: 'Mouse',
@@ -104,10 +136,13 @@ test('Should add expense to database and store', (done) => {
   }).then((snapshot) => {
     expect(snapshot.val()).toStrictEqual(expenseData);
     done();
+  }).catch((e) => {
+    console.log('Should add expense to Firebase and store error', e);
+    done();
   });
 });
 
-test('Should add expense with defaults to database and store', (done) => {
+test('Should add expense with defaults to Firebase and store', (done) => {
   const store = createMockStore({});
   const expenseDefaults = {
     description: '',
@@ -133,6 +168,9 @@ test('Should add expense with defaults to database and store', (done) => {
   }).then((snapshot) => {
     expect(snapshot.val()).toStrictEqual(expenseDefaults);
     done();
+  }).catch((e) => {
+    console.log('Should add expense with defaults to Firebase and store error', e);
+    done();
   });
 });
 
@@ -152,6 +190,9 @@ test('Should fetch the expenses from firebase', (done) => {
       type: 'SET_EXPENSES',
       expenses
     });
+    done();
+  }).catch((e) => {
+    console.log('Should fetch the expenses from firebase error', e);
     done();
   });
 });
