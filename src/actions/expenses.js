@@ -6,6 +6,7 @@ export const addExpense = (expense) => ({
   expense
 });
 
+// Add expense to Firebase.
 export const startAddExpense = (expenseData = {}) => {
   return (dispatch) => {
     // Set up the default values.
@@ -46,3 +47,27 @@ export const editExpense = (id, updates) => ({
   id,
   updates
 });
+
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type: 'SET_EXPENSES',
+  expenses
+});
+
+// Fetch expenses from Firebase.
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    return database.ref('expenses').once('value').then((snapshot) => {
+      const expenses = [];
+
+      snapshot.forEach((childSnapshot) => {
+        expenses.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+
+      dispatch(setExpenses(expenses));
+    });
+  };
+};
