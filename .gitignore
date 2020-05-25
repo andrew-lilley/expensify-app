@@ -7,3 +7,5 @@ public/resources/css
 public/resources/js
 yarn-error.log
 package-lock.json
+.env.development
+.env.test
