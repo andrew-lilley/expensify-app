@@ -1,125 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should render expense list with expenses 1`] = `
-<div>
-  <h1>
-    Expense List
-  </h1>
-  <ExpenseListItem
-    amount={195}
-    createdAt={0}
-    description="Gun"
-    id="1"
-    key="1"
-    note="Present for brother"
-    store={
-      Object {
-        "expenses": Array [
-          Object {
-            "amount": 195,
-            "createdAt": 0,
-            "description": "Gun",
-            "id": "1",
-            "note": "Present for brother",
-          },
-          Object {
-            "amount": 109500,
-            "createdAt": -345600000,
-            "description": "Rent",
-            "id": "2",
-            "note": "Includes deposit",
-          },
-          Object {
-            "amount": 4500,
-            "createdAt": 345600000,
-            "description": "Credit Card",
-            "id": "3",
-            "note": "Included flight",
-          },
-        ],
-      }
-    }
-  />
-  <ExpenseListItem
-    amount={109500}
-    createdAt={-345600000}
-    description="Rent"
-    id="2"
-    key="2"
-    note="Includes deposit"
-    store={
-      Object {
-        "expenses": Array [
-          Object {
-            "amount": 195,
-            "createdAt": 0,
-            "description": "Gun",
-            "id": "1",
-            "note": "Present for brother",
-          },
-          Object {
-            "amount": 109500,
-            "createdAt": -345600000,
-            "description": "Rent",
-            "id": "2",
-            "note": "Includes deposit",
-          },
-          Object {
-            "amount": 4500,
-            "createdAt": 345600000,
-            "description": "Credit Card",
-            "id": "3",
-            "note": "Included flight",
-          },
-        ],
-      }
-    }
-  />
-  <ExpenseListItem
-    amount={4500}
-    createdAt={345600000}
-    description="Credit Card"
-    id="3"
-    key="3"
-    note="Included flight"
-    store={
-      Object {
-        "expenses": Array [
-          Object {
-            "amount": 195,
-            "createdAt": 0,
-            "description": "Gun",
-            "id": "1",
-            "note": "Present for brother",
-          },
-          Object {
-            "amount": 109500,
-            "createdAt": -345600000,
-            "description": "Rent",
-            "id": "2",
-            "note": "Includes deposit",
-          },
-          Object {
-            "amount": 4500,
-            "createdAt": 345600000,
-            "description": "Credit Card",
-            "id": "3",
-            "note": "Included flight",
-          },
-        ],
-      }
-    }
-  />
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <ExpenseListItem
+      amount={195}
+      createdAt={0}
+      description="Gun"
+      id="1"
+      key="1"
+      note="Present for brother"
+    />
+    <ExpenseListItem
+      amount={109500}
+      createdAt={-345600000}
+      description="Rent"
+      id="2"
+      key="2"
+      note="Includes deposit"
+    />
+    <ExpenseListItem
+      amount={4500}
+      createdAt={345600000}
+      description="Credit Card"
+      id="3"
+      key="3"
+      note="Included flight"
+    />
+  </div>
 </div>
 `;
 
 exports[`should render ExpenseList with empty message 1`] = `
-<div>
-  <h1>
-    Expense List
-  </h1>
-  <p>
-    There are no expenses matching your search.
-  </p>
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <div
+      className="list-item list-item--message"
+    >
+      <span>
+        There are no expenses matching your search.
+      </span>
+    </div>
+  </div>
 </div>
 `;
