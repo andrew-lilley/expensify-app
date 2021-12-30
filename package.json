@@ -5,7 +5,7 @@
   "author": "Andrew Lilley",
   "license": "MIT",
   "engines": {
-    "node": "12.17.0"
+    "node": "14.18.2"
   },
   "scripts": {
     "build:dev": "webpack --mode=development",
